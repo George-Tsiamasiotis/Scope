@@ -7,7 +7,6 @@ requires-python = ">=3.14"
 dev = [
     "accurate-timed-loop>=1.1.0",
     "ipython>=9.10.0",
-    "matplotlib>=3.10.8",
     "numpy>=2.4.2",
     "pint>=0.25.2",
     "psutil>=7.2.2",
@@ -16,6 +15,12 @@ dev = [
     "termcolor>=3.3.0",
     "tqdm>=4.67.3",
     "zeroconf>=0.148.0",
+]
+plot = [
+    "matplotlib>=3.10.8",
+    "pandas>=3.0.1",
+    "scipy>=1.17.1",
+    "seaborn>=0.13.2",
 ]
 pygobject = [
     "pygobject>=3.54.5",
