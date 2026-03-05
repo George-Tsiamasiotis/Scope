@@ -53,7 +53,7 @@ class Scope(TCPIPInstrument):
 
     def set_coupling(self, coupling: Coupling):
         self.write(f":CHANnel{self.channel}:COUPling {coupling}")
-        print(f"Set voltage scale at {self.get_coupling()}")
+        print(f"Set coupling: {self.get_coupling()}")
 
     def get_coupling(self) -> str:
         return self.query(f":CHANnel{self.channel}:COUPling?")
@@ -70,6 +70,13 @@ class Scope(TCPIPInstrument):
     # =========================
     # ======== Measure Commands
     # =========================
+
+    def enable_frequency_count(self, channel: Channel):
+        self.write(f":MEASure:COUNter:SOURce CHANnel{channel}")
+
+    def query_frequency_count(self) -> PlainQuantity:
+        m = float(self.query(f":MEASure:COUN:VAL?"))
+        return Q(m, "hertz")
 
     def query_voltage_average(self) -> PlainQuantity:
         m = float(self.query(f":MEASure:ITEM? VAVG,CHANnel{self.channel}"))

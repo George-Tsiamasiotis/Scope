@@ -23,7 +23,7 @@ scope = Scope()
 #########
 
 scope.set_coupling("DC")
-scope.set_time_scale(Q(20, "milliseconds"))
+scope.set_time_scale(Q(500, "milliseconds"))
 scope.set_voltage_scale(Q(100, "volts"))
 scope.set_acquire_type("HighResolution")
 
@@ -46,7 +46,7 @@ start = time.time()
 measurements, times = [], []
 
 
-pbar = tqdm(total=int(MEASUREMENTS))
+pbar = tqdm(total=int(MEASUREMENTS), smoothing=0.01)
 try:
     for elapsed, start_time in accurate_wait(TIME_TO_MEASURE.m, SLEEP_TIME.m):
         voltage = scope.query_voltage_average()
@@ -60,4 +60,4 @@ except:
 
 
 np.savez("solar_dump.npz", measurements=measurements, times=times)
-print("saved")
+scope.close()
