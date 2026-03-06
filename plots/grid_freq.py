@@ -55,7 +55,7 @@ interval = Q(interval).to("seconds")
 n = len(dfr)
 fourier = fft(dfr["frequency"] - dfr["frequency"].mean()) / n
 fourier = np.abs(fourier)
-freq = fftfreq(len(fourier))
+freq = fftfreq(len(fourier), d=interval.m)
 # remove DC bias and normalize
 fourier = fourier[freq > 0]
 freq = freq[freq > 0]
